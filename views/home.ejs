@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <!--Here we can use locals.title as well as locals is globlal object in js.-->
+        <title>
+            <%=locals.title%> 
+        </title>
+        <script src="https://kit.fontawesome.com/34c6a69dd5.js" crossorigin="anonymous"></script>
+        <!--Our css should be below or all other styles so that we can override it.-->
+        <link rel="stylesheet" href="/css/home.css">
+
+    </head>
+    <body>
+        <h1 id="page-heading">
+            <i class="fas fa-address-book"></i>
+            Contact List
+        </h1>
+        <div id="contact-list-container">
+            <ul>
+                <% for(let i of contact_list){ %>
+                    <li class="contact">
+                        <div class="details">
+                            <p><%= i.name %></p>
+                            <p><%= i.phone_no %></p>
+                        </div>
+                        <div class="delete-button">
+                            <a href="/delete-contact/?id=<%= i._id %>"> 
+                            <!--<a href="/delete-contact/<%= i.phone_no %>">-->
+                                <i class="fas fa-trash"></i> 
+                            </a>
+
+                        </div>
+                        
+                    </li>
+
+                <% } %>
+            </ul>
+        </div>
+        <br>
+        <!-- Creating Form to add new contacts in contact list-->
+        <!--Action in form indicates where you want to send data.-->
+        <form id="new-contact-form" action="/create-contact" method="POST">
+            <input type="text" name="name" placeholder="Enter Name" required>
+            <input type="tel" name="phone_no" placeholder="Enter Phone No" required>
+            <button type="submit">Add New Contact</button> 
+        </form>
+        <script type="text/javascript" src="/js/home.js"></script>
+        
+    </body>
+</html>
